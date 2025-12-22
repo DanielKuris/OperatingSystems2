@@ -53,7 +53,7 @@ int main(void) {
     /* 2nd record (SEEK_SET) */
     print_record(fd, rec, SEEK_SET);
 
-    /* one before last (SEEK_END) */cl
+    /* one before last (SEEK_END) */
     print_record(fd, -2 * rec, SEEK_END);
 
     /* 50th record (SEEK_SET) */
