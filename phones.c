@@ -28,11 +28,12 @@ void print_record(int fd, off_t offset, int whence) {
 
     /* Name: remove comma and trailing spaces */
     write(1, "Name: ", sizeof("Name: ") - 1);
-    for (int i = 0; i < NAME_SIZE && phone.name[i] != ' ' ; i++)
-		if(phone.name[i] == ',')
-			write(1, ", ", sizeof(", ") - 1);
-		else
-        	write(1, &phone.name[i], 1);
+    for (int i = 0; i < NAME_SIZE; i++) {
+	    if (phone.name[i] == ',')      // replace commas with space    
+		write(1, " ", 1);             
+	    else if (phone.name[i] != ' ')    // skip trailing spaces at end of name
+		write(1, &phone.name[i], 1);
+	}
 
     write(1, ", Phone: ", sizeof(", Phone: ") - 1);
     write(1, phone.phone_num, 12);
@@ -52,7 +53,7 @@ int main(void) {
     /* 2nd record (SEEK_SET) */
     print_record(fd, rec, SEEK_SET);
 
-    /* one before last (SEEK_END) */
+    /* one before last (SEEK_END) */cl
     print_record(fd, -2 * rec, SEEK_END);
 
     /* 50th record (SEEK_SET) */
