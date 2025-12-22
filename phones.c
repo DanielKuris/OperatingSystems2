@@ -65,6 +65,37 @@ int main(void) {
     /* 51st record (SEEK_CUR forward) */
     print_record(fd, rec, SEEK_CUR);
 
+    /* Error examples: */
+    
+    // Open error:
+    
+    /*
+    fd = open("errorex.dat", O_RDONLY);
+    if (fd == -1) {
+        perror("open");
+        exit(1);
+    }
+    */
+    
+    // Lseek error:
+    
+    //print_record(fd, -5, SEEK_SET); // SEEK_END loops after exceeded
+    
+    // Read error
+    // Reading X bytes into a small buffer of size <X will result in an logical error and may print "success" 		 			 error message for successfully reading into buffer, despite it not counting as an error (but rather a warning)
+    /*
+    close(fd);
+    fd = open("phones.dat", O_WRONLY);
+    if (fd == -1) {
+        perror("open");
+        exit(1);
+    }
+    struct phone_rec phone;
+    if (read(fd, &phone, sizeof(phone)) != sizeof(phone)) {  
+        perror("read");
+    }
+    */
+
     close(fd);
     return 0;
 }
