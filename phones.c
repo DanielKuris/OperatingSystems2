@@ -67,7 +67,8 @@ int main(void) {
 
     /* Error examples: */
     
-    // Open error:
+    // Open error: 
+    // File doesn't exist error
     
     /*
     fd = open("errorex.dat", O_RDONLY);
@@ -78,11 +79,16 @@ int main(void) {
     */
     
     // Lseek error:
+    // Invalid file position (seeks before start)
+
+    //print_record(fd, -5, SEEK_SET); // SEEK_END loops after exceeded, therefore can't use it for error
     
-    //print_record(fd, -5, SEEK_SET); // SEEK_END loops after exceeded
+    // Read error:
+    // File opened in Write Only, therefore cannot be read from
+
+    // Reading X bytes into a small buffer of size <X will result in an logical error and may print "success" 
+    // error message for successfully reading into buffer, despite it not counting as an error (but rather a warning)
     
-    // Read error
-    // Reading X bytes into a small buffer of size <X will result in an logical error and may print "success" 		 			 error message for successfully reading into buffer, despite it not counting as an error (but rather a warning)
     /*
     close(fd);
     fd = open("phones.dat", O_WRONLY);
